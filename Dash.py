@@ -4,7 +4,7 @@ import pandas as pd
 import plotly.express as px
 
 st.set_page_config(layout='wide', menu_items={"Get help":"https://www.youtube.com/", "About":"Este relatório tem como base apenas estudos."}) # setando para que o dashboard pegue a tela toda e não fique centralizado
-
+st.write(st.secrets)
 ## Funções
 def formata_numero(valor, prefixo = ''):
     for unidade in ['', 'mil']:
@@ -260,4 +260,5 @@ with aba3:
                                         title = f'Top {qtd_vendedores} vendedores (quantidade)')
         vendas_vendedores.update_layout(yaxis_title = 'Vendedores')
         st.plotly_chart(vendas_vendedores)
+
 
