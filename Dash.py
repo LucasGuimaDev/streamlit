@@ -13,6 +13,48 @@ def formata_numero(valor, prefixo = ''):
         valor /=1000
     return f'{prefixo} {valor:.2f} milhões'
 
+# ---------------- LOGIN ---------------- #
+
+def login():
+
+    st.title("🔐 Login")
+
+    username = st.text_input("Usuário")
+    password = st.text_input("Senha", type="password")
+
+    if st.button("Entrar"):
+
+        users = st.secrets["users"]
+
+        if username in users:
+
+            if password == users[username]:
+                st.session_state["logged"] = True
+                st.session_state["user"] = username
+                st.rerun()
+
+            else:
+                st.error("Senha incorreta")
+
+        else:
+            st.error("Usuário não encontrado")
+
+
+if "logged" not in st.session_state:
+    st.session_state["logged"] = False
+
+
+if not st.session_state["logged"]:
+    login()
+    st.stop()
+
+# ---------------- APP ---------------- #
+
+st.sidebar.success(f"Logado como: {st.session_state['user']}")
+
+if st.sidebar.button("Logout"):
+    st.session_state["logged"] = False
+    st.rerun()
 
 st.title('DASHBOARD DE VENDAS')
 
